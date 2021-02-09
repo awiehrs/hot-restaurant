@@ -32,7 +32,45 @@
     </div>
     
 
-    <script></script>
+    <script>
+   
+    const idSpot = 
+    const idEl = document.getElementById("#idItem")
+
+        // Using a RegEx Pattern to remove spaces from searchedCharacter
+        // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+        searchedReservation = searchedReservation.replace(/\s+/g, '').toLowerCase();
+
+        fetch(`/api/reservations/`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            let idEl = data.id;
+            $("#idItem").text(idEL)
+            // console.log(data);
+    //         const { name, phone, email, id } = data;
+
+    //         if (data) {
+
+    //         fpEl.textContent = forcePoints;
+                idEl.textContent = data.id;
+    //         } else {
+    //           nameEl.textContent =
+    //             'The force is not strong with this one. Your character was not found.';
+    //             statsEl.setAttribute('style', 'display: none');
+    //         }
+    //       })
+    //       .catch((error) => {
+    //         console.error(error);
+    //       });
+
+
+
+    </script>
 
     <!-- External script sources-->
     <script src="https://kit.fontawesome.com/127ce790ad.js" crossorigin="anonymous"></script>
