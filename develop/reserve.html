@@ -16,7 +16,7 @@
             <h1 class="display-4"><i class="fas fa-fire"></i> Hot Restaurant</h1>
             <p class="lead"></p>
             <p class="lead">
-              <a class="btn btn-primary btn-lg" href="./tables.html" role="button"><i class="fas fa-utensils"></i> View Tables</a> <a class="btn btn-secondary btn-lg" href="./home.html" role="button"><i class="fas fa-home"></i></a>
+              <a class="btn btn-primary btn-lg" href="./tables" role="button"><i class="fas fa-utensils"></i> View Tables</a> <a class="btn btn-secondary btn-lg" href="/" role="button"><i class="fas fa-home"></i></a>
             </p>
         </div>
 
@@ -24,28 +24,68 @@
             <form>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Name</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name for reservation">
+                  <input type="email" class="form-control" id="nameinput" aria-describedby="emailHelp" placeholder="Enter name for reservation">
                   
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Phone Number</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter a number we can contact you at">
+                  <input type="password" class="form-control" id="phoneinput" placeholder="Enter a number we can contact you at">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">E-Mail</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter an e-mail to confirm your reservation">
+                    <input type="password" class="form-control" id="emailinput" placeholder="Enter an e-mail to confirm your reservation">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">ID</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter an ID">
+                    <input type="password" class="form-control" id="idinput" placeholder="Enter an ID">
                   </div><br>
-                <button type="submit" class="btn btn-primary">Submit</button><br><br>
+                <button type="submit" id="submitbtn" class="btn btn-primary">Submit</button><br><br>
               </form>
         </div>
     </div>
 
 
-    <script></script>
+    <script>
+      const submitBtn = document.getElementById('submitbtn');
+      
+      // Question: What is "e" short for?
+      submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+
+      // Question: What does this code do?
+      let tableName = document.getElementById('nameinput').value.trim();
+        let tablePhone = document.getElementById('phoneinput').value.trim();
+        let tableEmail = document.getElementById('emailinput').value.trim();
+        let tableId = document.getElementById('idinput').value.trim();
+
+        let newTable = {
+          name: tableName,
+          phone: tablePhone,
+          email: tableEmail,
+          id: tableId,
+        };
+
+
+        // Question: What does this code do??
+        fetch('/api/reservations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newTable),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('add.html', data);
+            alert(`Reservation added: ${data.name}`);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      });
+
+    </script>
 
     <!-- External script sources-->
     <script src="https://kit.fontawesome.com/127ce790ad.js" crossorigin="anonymous"></script>
